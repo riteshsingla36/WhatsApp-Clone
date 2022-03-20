@@ -1,10 +1,26 @@
 import { Chat, DonutLarge, MoreVert, SearchOutlined } from '@mui/icons-material'
 import { Avatar, IconButton } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Left.css"
 import LeftChat from './LeftChat'
+import db from "./fire/firebase"
 
 const Left = () => {
+
+  const [chats, setChats] = useState([])
+
+  useEffect(() => {
+    db.collection("chats").onSnapshot(snapshot => (
+      setChats(snapshot.docs.map(doc => 
+        (
+          {
+            id: doc.id,
+            data: doc.data() 
+          }
+        )))
+    ))
+  }, [])
+
   return (
     <div className='left'>
       <div className="header">
@@ -34,12 +50,10 @@ const Left = () => {
 
       <div className="chats">
         <LeftChat newChat/>
-        <LeftChat/>
-        <LeftChat/>
-        <LeftChat/>
-        <LeftChat/>
-        <LeftChat/>
-        <LeftChat/>
+        {chats.map(chat => (
+          <LeftChat key={chat.id} id={chat.id} name={chat.data.name} />
+        ))}
+        
       </div>
     </div>
   )

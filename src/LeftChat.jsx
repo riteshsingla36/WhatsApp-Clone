@@ -2,7 +2,7 @@ import { Avatar } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import "./LeftChat.css"
 
-const LeftChat = ({ newChat }) => {
+const LeftChat = ({ id, name, newChat }) => {
 
     const [avatars, setAvatars] = useState("")
     useEffect(() => {
@@ -25,7 +25,7 @@ const LeftChat = ({ newChat }) => {
             <div className='leftchat'>
                 <Avatar src={`https://avatars.dicebear.com/api/adventurer/${avatars}.svg`} />
                 <div className="leftchat_inner">
-                    <h2>Chat Name</h2>
+                    <h2>{name}</h2>
                     <p>Last Chat.....</p>
                 </div>
             </div>
