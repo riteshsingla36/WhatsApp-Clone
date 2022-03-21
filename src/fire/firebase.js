@@ -1,6 +1,6 @@
 import firebase from "firebase"
 
-// import { getFirestore } from "firebase/firestore";
+
 
 
 const firebaseConfig = {
