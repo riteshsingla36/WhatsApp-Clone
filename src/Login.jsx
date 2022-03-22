@@ -1,12 +1,15 @@
 import { Button } from '@material-ui/core'
 import { auth, provider } from './fire/firebase'
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import './Login.css'
+import { update_user } from './Redux/actions'
 
-const Login = () => { 
+const Login = () => {
+    const dispatch = useDispatch()
     const signIn = () => {
         auth.signInWithPopup(provider)
-        .then(result => console.log(result))
+        .then(result => dispatch(update_user(result)))
         .catch(err => alert(err.message))
     }
     return (

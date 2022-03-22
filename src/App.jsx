@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Left from "./Left"
@@ -6,7 +7,7 @@ import Login from './Login';
 import Right from "./Right"
 
 function App() {
-  const [user, setUser] = useState(null)
+  const user = useSelector(store => store.user)
   return (
     <div className="app">
 
