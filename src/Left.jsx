@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import "./Left.css"
 import LeftChat from './LeftChat'
 import db from "./fire/firebase"
+import { Link } from 'react-router-dom'
 
 const Left = () => {
 
@@ -51,7 +52,9 @@ const Left = () => {
       <div className="chats">
         <LeftChat newChat/>
         {chats.map(chat => (
+          <Link to={`/chat/${chat.id}`} >
           <LeftChat key={chat.id} id={chat.id} name={chat.data.name} />
+          </Link>
         ))}
         
       </div>

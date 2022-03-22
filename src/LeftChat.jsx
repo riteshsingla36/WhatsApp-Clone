@@ -1,5 +1,6 @@
 import { Avatar } from '@mui/material'
 import React, { useEffect, useState } from 'react'
+import db from './fire/firebase'
 import "./LeftChat.css"
 
 const LeftChat = ({ id, name, newChat }) => {
@@ -12,7 +13,9 @@ const LeftChat = ({ id, name, newChat }) => {
     const addNew = () => {
         const chatNew = prompt("Enter Chat Name")
         if(chatNew) {
-
+            db.collection('chats').add({
+                name: chatNew
+            })
         }
         else {
             

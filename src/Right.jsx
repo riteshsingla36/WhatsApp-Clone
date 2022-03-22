@@ -1,11 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Right.css"
 import { Avatar, IconButton } from '@mui/material'
 import { AttachFile, InsertEmoticon, Mic, MoreVert, SearchOutlined } from '@mui/icons-material'
+import { useParams } from 'react-router-dom'
+import db from './fire/firebase'
 
 const Right = () => {
-
+  const {id} = useParams()
   const [msg, setMsg] = useState("");
+  const [avatars, setAvatars] = useState("")
+   
+  const [chatName, setChatName] = useState("")
+  useEffect(() => {
+    setAvatars(Math.floor(Math.random() * 5000))
+}, [id])
+
+  useEffect(() => {
+    db.collection("chats").doc(id).onSnapshot(snapshot => {
+      setChatName(snapshot.data().name)
+    })
+  }, [id])
 
   function sendMessage(e) {
     e.preventDefault()
@@ -13,10 +27,10 @@ const Right = () => {
   return (
     <div className='right'>
       <div className="header">
-        <Avatar src="https://avatars.dicebear.com/api/adventurer/hum.svg" />
+        <Avatar src={`https://avatars.dicebear.com/api/adventurer/${avatars}.svg`} />
 
         <div className="header_details">
-          <h3>Chat Name</h3>
+          <h3>{chatName}</h3>
           <p>Last Seen ....</p>
         </div>
 
