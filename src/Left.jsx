@@ -5,12 +5,15 @@ import "./Left.css"
 import LeftChat from './LeftChat'
 import db from "./fire/firebase"
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const Left = () => {
 
   const [chats, setChats] = useState([])
+  const user = useSelector(store => store.user)
 
   useEffect(() => {
+    console.log("user",user)
     db.collection("chats").onSnapshot(snapshot => (
       setChats(snapshot.docs.map(doc => 
         (
@@ -25,7 +28,7 @@ const Left = () => {
   return (
     <div className='left'>
       <div className="header">
-        <Avatar src='' />
+        <Avatar src={user?.photoURL} />
         <div className="header_inner">
           <IconButton>
             <DonutLarge />

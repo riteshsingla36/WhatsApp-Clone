@@ -9,7 +9,7 @@ const Login = () => {
     const dispatch = useDispatch()
     const signIn = () => {
         auth.signInWithPopup(provider)
-        .then(result => dispatch(update_user(result)))
+        .then(result => dispatch(update_user(result.user)))
         .catch(err => alert(err.message))
     }
     return (
