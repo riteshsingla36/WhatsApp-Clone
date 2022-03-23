@@ -53,3 +53,8 @@
     overflow: scroll;
     flex: 1;
 }
+
+.chats a {
+    text-decoration: none !important;
+    color: black;
+}

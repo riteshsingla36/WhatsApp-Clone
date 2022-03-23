@@ -6,8 +6,16 @@ import "./LeftChat.css"
 const LeftChat = ({ id, name, newChat }) => {
 
     const [avatars, setAvatars] = useState("")
+    const [msgs, setMsgs] = useState("")
     useEffect(() => {
         setAvatars(Math.floor(Math.random() * 5000))
+    }, [])
+
+    useEffect(() => {
+        if(id) {
+            db.collection("chats").doc(id).collection("messages").orderBy("timestamp", "desc").onSnapshot(snapshot=> setMsgs(snapshot.docs.map(doc => doc.data())))
+
+        }
     }, [])
 
     const addNew = () => {
@@ -29,7 +37,7 @@ const LeftChat = ({ id, name, newChat }) => {
                 <Avatar src={`https://avatars.dicebear.com/api/adventurer/${avatars}.svg`} />
                 <div className="leftchat_inner">
                     <h2>{name}</h2>
-                    <p>Last Chat.....</p>
+                    <p>{msgs[0]?.message }</p>
                 </div>
             </div>
         ) :

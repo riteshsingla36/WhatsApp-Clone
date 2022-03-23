@@ -17,3 +17,7 @@
 .leftchat_inner {
     margin-left: 15px;
 }
+
+.leftchat_inner > p {
+    color: silver !important;
+}
