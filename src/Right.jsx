@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 import db from './fire/firebase'
 import { useSelector } from 'react-redux'
 import firebase from 'firebase'
+import ReactScrollableFeed from "react-scrollable-feed"
 
 const Right = () => {
   const { id } = useParams()
@@ -63,6 +64,8 @@ const Right = () => {
       </div>
 
       <div className="right_body">
+        <ReactScrollableFeed>
+        <div style={{padding: "30px 30px 0 30px"}}>
         {messages.map(message => (
      
             <p className={`right_body_sender ${message.name === user.displayName? "right_body_receiver": ""}`}>
@@ -70,9 +73,9 @@ const Right = () => {
               {message.message}
               <span className='message_time'>{new Date(message.timestamp?.toDate()).toUTCString()}</span>
             </p>
-            
-           
         ))}
+        </div>
+        </ReactScrollableFeed>
 
       </div>
 
