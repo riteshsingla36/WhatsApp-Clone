@@ -51,6 +51,7 @@
 .chats {
     background-color: white;
     overflow: scroll;
+    overflow-x: hidden;
     flex: 1;
 }
 
